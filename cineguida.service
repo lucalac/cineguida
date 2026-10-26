@@ -1,0 +1,17 @@
+[Unit]
+Description=CineGuida Web Application (RaiPlay & Mediaset JSON Movie Guide)
+After=network-online.target tvheadend.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=pi
+WorkingDirectory=/home/pi/cineguida
+Environment="CINEGUIDA_PORT=8090"
+Environment="TVH_HOST=127.0.0.1"
+ExecStart=/usr/bin/python3 /home/pi/cineguida/cineguida.py -p 8090 --no-browser
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target
